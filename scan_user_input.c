@@ -23,18 +23,13 @@ int passenger_amount()
 {
     int amount;
 
-    do
+    printf("How many travelers are you planning to travel with? Between 1-100. (Including yourself): ");
+    scanf(" %d", &amount);
+
+    while (amount > 0 && amount >= 100)
     {
-        printf("How many travelers are you planning to travel with? Between 1-100. (Including yourself): ");
-        scanf(" %d", &amount);
-
-        if (amount > 0 && amount >= 100)
-        {
-            printf("\nInvalid input:\n");
-        }
-
-    } while (amount > 0 && amount >= 100);
-
+        printf("\nError: Must input between 1-100, try again: ")
+    }
     return amount;
 }
 
@@ -42,20 +37,18 @@ int ratings(int question)
 {
     int answer;
 
-    printf("\n");
-
     switch (question)
     {
     case 1:
-        printf("On a scale of 1-5, indicate the extent to which you prioritize CO2 emmesions: ");
+        printf("\nOn a scale of 1-5, indicate the extent to which you prioritize reduction of CO2 emmesions: ");
         break;
 
     case 2:
-        printf("On a scale of 1-5, indicate the extent to which you prioritize travel time: ");
+        printf("\nOn a scale of 1-5, indicate the extent to which you prioritize fast travel time: ");
         break;
 
     case 3:
-        printf("On a scale of 1-5, indicate the extent to which you prioritize the price: ");
+        printf("\nOn a scale of 1-5, indicate the extent to which you prioritize the price: ");
         break;
 
     default:
@@ -66,7 +59,7 @@ int ratings(int question)
 
     while (answer <= 0 || answer > 5)
     {
-        printf("\nInvalid input, must an integer between 1-5: ");
+        printf("\nError: Must input an integer between 1-5: ");
         scanf(" %d", &answer);
     }
 
