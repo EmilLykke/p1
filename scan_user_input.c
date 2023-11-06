@@ -28,7 +28,8 @@ int passenger_amount()
 
     while (amount < 0 || amount > 100)
     {
-        printf("\nError: Must input between 1-100, try again: ")
+        printf("\nError: Must input between 1-100, try again: ");
+        scanf("%d", &amount);
     }
     return amount;
 }
