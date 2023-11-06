@@ -26,7 +26,7 @@ int passenger_amount()
     printf("How many travelers are you planning to travel with? Between 1-100. (Including yourself): ");
     scanf(" %d", &amount);
 
-    while (amount > 0 && amount >= 100)
+    while (amount < 0 || amount > 100)
     {
         printf("\nError: Must input between 1-100, try again: ")
     }
