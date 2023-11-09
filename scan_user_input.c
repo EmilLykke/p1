@@ -67,7 +67,7 @@ int ratings(int question)
     return answer;
 }
 
-startpoint_and_destination(char *start, char *end)
+void startpoint_and_destination(char *start, char *end)
 {
     printf("Input your starting destination: ");
     scanf("%s", start);
