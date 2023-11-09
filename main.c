@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdio.h>
 
-void scan_user_input(int *number_of_passengers, int *co2_rating, int *time_rating, int *price_rating, char *start, char *end);
+void scan_user_input(int *, int *, int *, int *, char *, char *);
 
 int main(void)
 {
