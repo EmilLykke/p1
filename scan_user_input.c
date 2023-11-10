@@ -1,22 +1,22 @@
 #include <stdio.h>
+#include <string.h>
 
 void scan_user_input();
 
 int passenger_amount();
 int ratings(int);
-void startpoint_and_destination();
+void startpoint_and_destination(char *, char *);
 
-void scan_user_input() // note: skal retunere rating, passenger antal og start-slut destination
+void scan_user_input(int *number_of_passengers, int *co2_rating, int *time_rating, int *price_rating, char *start, char *end)
 {
-    int number_of_passengers, co2_rating, price_rating, time_rating;
 
-    number_of_passengers = passenger_amount();
+    *number_of_passengers = passenger_amount();
 
-    co2_rating = ratings(1);
-    time_rating = ratings(2);
-    price_rating = ratings(3);
+    *co2_rating = ratings(1);
+    *time_rating = ratings(2);
+    *price_rating = ratings(3);
 
-    startpoint_and_destination();
+    startpoint_and_destination(start, end);
 }
 
 int passenger_amount()
@@ -65,4 +65,13 @@ int ratings(int question)
     }
 
     return answer;
+}
+
+void startpoint_and_destination(char *start, char *end)
+{
+    printf("Input your starting destination: ");
+    scanf("%s", start);
+
+    printf("\nInput your end destination: ");
+    scanf("%s", end);
 }
