@@ -1,0 +1,13 @@
+StartDest;EndDest;TravelTime;Price;
+Munich;Berlin;70;98.77;
+Munich;Berlin;70;109.77;
+Berlin;Munich;70;227.13;
+Berlin;Munich;70;125.23;
+Hamburg;Munich;80;98.53;
+Hamburg;Munich;75;138.53;
+Munich;Hamburg;80;103.25;
+Munich;Hamburg;80;139.25;
+Frankfurt;Berlin;70;103.27;
+Frankfurt;Berlin;70;114.27;
+Berlin;Frankfurt;75;97.13;
+Berlin;Frankfurt;75;116.13;
