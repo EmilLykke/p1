@@ -1,23 +1,6 @@
+#include "functions.h"
 #include <stdio.h>
 #include <string.h>
-
-void scan_user_input();
-
-int passenger_amount();
-int ratings(int);
-void startpoint_and_destination(char *, char *);
-
-void scan_user_input(int *number_of_passengers, int *co2_rating, int *time_rating, int *price_rating, char *start, char *end)
-{
-
-    *number_of_passengers = passenger_amount();
-
-    *co2_rating = ratings(1);
-    *time_rating = ratings(2);
-    *price_rating = ratings(3);
-
-    startpoint_and_destination(start, end);
-}
 
 int passenger_amount()
 {
@@ -74,4 +57,15 @@ void startpoint_and_destination(char *start, char *end)
 
     printf("\nInput your end destination: ");
     scanf("%s", end);
+}
+void scan_user_input(int *number_of_passengers, int *co2_rating, int *time_rating, int *price_rating, char *start, char *end)
+{
+
+    *number_of_passengers = passenger_amount();
+
+    *co2_rating = ratings(1);
+    *time_rating = ratings(2);
+    *price_rating = ratings(3);
+
+    startpoint_and_destination(start, end);
 }
