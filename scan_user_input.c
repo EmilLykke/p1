@@ -52,12 +52,18 @@ int ratings(int question)
 
 void startpoint_and_destination(char *start, char *end)
 {
+    char firstletter;
+
     printf("Input your starting destination: ");
     scanf("%s", start);
 
     printf("\nInput your end destination: ");
     scanf("%s", end);
+
+    toupper(start[0]);
+    toupper(end[0]);
 }
+
 void scan_user_input(int *number_of_passengers, int *co2_rating, int *time_rating, int *price_rating, char *start, char *end)
 {
 
