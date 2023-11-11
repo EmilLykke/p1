@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 int find_route(struct traveloption *, char *, char *, int);
 
@@ -18,7 +19,7 @@ int find_route(struct traveloption *, char *, char *, int);
 int find_route(struct traveloption *airplane_or_train_option, char *input_startdestination, char *input_enddestination, int size)
 {
     int i, index = -1;
-    int newtime, time = 100000;
+    int newtime, time = INT_MAX;
 
     // int size = sizeof(airplane_or_train_option) / sizeof(airplane_or_train_option[0]); // calculates size of  array
 
