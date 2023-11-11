@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void find_route(struct traveloption *, char *, char *, int);
+int find_route(struct traveloption *, char *, char *, int);
 
 /* struct traveloption
 {
@@ -17,16 +17,30 @@ void find_route(struct traveloption *, char *, char *, int);
 
 int find_route(struct traveloption *airplane_or_train_option, char *input_startdestination, char *input_enddestination, int size)
 {
-    int i;
+    int i, index = -1;
+    int newtime, time = 100000;
+
     // int size = sizeof(airplane_or_train_option) / sizeof(airplane_or_train_option[0]); // calculates size of  array
 
     for (i = 0; i < size; i++)
     {
-        if (strcmp(airplane_or_train_option[i].startdest, input_startdestination) && strcmp(airplane_or_train_option[i].enddest, input_enddestination))
+        if (strcmp(airplane_or_train_option[i].startdest, input_startdestination) == 0 && strcmp(airplane_or_train_option[i].enddest, input_enddestination) == 0)
         {
-            return i; // returns the index of the correct array travel option
+
+            newtime = airplane_or_train_option[i].traveltime;
+
+            if (newtime < time)
+            {
+                index = i;
+                time = newtime;
+            }
         }
     }
 
-    return -1; // couldn't find the designated travel option in the dataset
+    if (index < 0)
+    {
+        return -1; // couldn't find the designated travel option in the dataset
+    }
+
+    return index; // returns index of the array in which the correct travel route matches
 }
