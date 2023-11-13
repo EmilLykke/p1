@@ -2,7 +2,7 @@
 #include <string.h>
 #include <limits.h>
 
-int find_route(struct traveloption *, char *, char *, int);
+int find_route(struct traveloption *, char, char, int);
 
 /* struct traveloption
 {
@@ -16,7 +16,7 @@ int find_route(struct traveloption *, char *, char *, int);
 // i en funktionen den kaldes i skal man benytte sizeof til at finde str af de to arrays når de sendes til funktionen her.
 // den vil retunere indexet af den string der har det samme navn i data sættet i startdest og slutdest
 
-int find_route(struct traveloption *airplane_or_train_option, char *input_startdestination, char *input_enddestination, int size)
+int find_route(struct traveloption *airplane_or_train_option, char input_startdestination, char input_enddestination, int size)
 {
     int i, index = -1;
     int newtime, time = INT_MAX;
