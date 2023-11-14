@@ -1,3 +1,4 @@
+#include "functions.h"
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
@@ -6,8 +7,8 @@ int find_route(struct traveloption *, char, char, int);
 
 /* struct traveloption
 {
-    char startdest[100];
-    char enddest[100];
+    char startDest[100];
+    char endDest[100];
     int traveltime;
     int price;
     int co2;
@@ -25,7 +26,7 @@ int find_route(struct traveloption *airplane_or_train_option, char input_startde
 
     for (i = 0; i < size; i++)
     {
-        if (strcmp(airplane_or_train_option[i].startdest, input_startdestination) == 0 && strcmp(airplane_or_train_option[i].enddest, input_enddestination) == 0)
+        if (strcmp(airplane_or_train_option[i].startDest, input_startdestination) == 0 && strcmp(airplane_or_train_option[i].endDest, input_enddestination) == 0)
         {
 
             newtime = airplane_or_train_option[i].traveltime;
