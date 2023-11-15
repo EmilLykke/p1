@@ -10,7 +10,7 @@ enum train_or_plaine
 
 void scan_user_input(int *, int *, int *, int *, char *, char *);
 void csv_read();
-void find_route(struct traveloption *, char, char, int, int *, int *, int *, int);
+void find_route(Traveloption *, char, char, int, int *, int *, int *, int);
 
 int main(void)
 {
