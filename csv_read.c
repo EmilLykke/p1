@@ -3,44 +3,77 @@
 #include <string.h>
 #include <stdlib.h>
 
-const char *splitString(char *line, int num)
+// Returns an array of the different sections of the string
+char **splitString(char *line)
 {
-    const char *tok;
-    for (tok = strtok(line, ";"); tok && *tok; tok = strtok(NULL, ";\n"))
+    char *tok = strtok(line, ";");
+    int i = 0;
+    char **array = (char **)malloc(5 * (6 + strlen(tok)));
+    while (tok != NULL)
     {
-        if (!--num)
-        {
-            return tok;
-        }
+        array[i] = strdup(tok);
+        tok = strtok(NULL, ";");
+        i++;
     }
-    return NULL;
+    return array;
 }
 
 void csv_read()
 {
-    // opens flights file
-    FILE *stream = fopen("flights.csv", "r");
     char line[1024];
 
+    // opens flights file
+    FILE *stream = fopen("flights.csv", "r");
+    Traveloption flightOptions[12];
+
     // Read lines of flights file
+    int i = 0;
     while (fgets(line, 1024, stream))
     {
-        char *tmp = strdup(line);
+        if (i != 0)
+        {
+            char *tmp = strdup(line);
+            Traveloption item;
+            char **option = splitString(tmp);
 
-        printf("%s\n", splitString(tmp, 3));
-        free(tmp);
+            item.startDest = option[0];
+            item.endDest = option[1];
+            sscanf(option[2], "%d", &item.travelTime);
+            sscanf(option[3], "%lf", &item.price);
+            sscanf(option[4], "%lf", &item.distance);
+
+            flightOptions[i - 1] = item;
+
+            free(tmp);
+        }
+        i++;
     }
     fclose(stream);
 
     // opens trains file
     stream = fopen("trains.csv", "r");
+    Traveloption trainOptions[14];
     // Read lines of trains file
+    i = 0;
     while (fgets(line, 1024, stream))
     {
-        char *tmp = strdup(line);
+        if (i != 0)
+        {
+            char *tmp = strdup(line);
+            Traveloption item;
+            char **option = splitString(tmp);
 
-        printf("%s\n", splitString(tmp, 3));
-        free(tmp);
+            item.startDest = option[0];
+            item.endDest = option[1];
+            sscanf(option[2], "%d", &item.travelTime);
+            sscanf(option[3], "%lf", &item.price);
+            sscanf(option[4], "%lf", &item.distance);
+
+            trainOptions[i - 1] = item;
+
+            free(tmp);
+        }
+        i++;
     }
     fclose(stream);
 }
