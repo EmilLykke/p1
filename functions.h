@@ -7,6 +7,8 @@ typedef struct Traveloption
     double price;
     int co2;
     double distance;
+    int wasteTime;
+    int totalTime;
 } Traveloption;
 
 // Scans user input
