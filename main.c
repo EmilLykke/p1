@@ -7,6 +7,7 @@ void csv_read();
 
 int main(void)
 {
+    printf("Hej med dig Faetter guf");
     char startdestination[100];
     char enddestination[100];
     int co2_rating, time_rating, price_rating, number_of_passengers;
