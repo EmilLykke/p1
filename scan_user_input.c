@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
+int passenger_amount();
+int ratings(int);
+void startpoint_and_destination(char *, char *);
+
 int passenger_amount()
 {
     int amount;
