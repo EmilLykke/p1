@@ -1,5 +1,5 @@
 
-typedef struct Traveloption
+typedef struct
 {
     char *startDest;
     char *endDest;
@@ -15,4 +15,4 @@ typedef struct Traveloption
 void scan_user_input(int *, int *, int *, int *, char *, char *);
 
 // Read csv files
-void csv_read();
+void csv_read(Traveloption **, Traveloption **);

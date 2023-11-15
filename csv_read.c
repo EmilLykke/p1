@@ -18,7 +18,7 @@ char **splitString(char *line)
     return array;
 }
 
-void csv_read()
+void csv_read(Traveloption **flights_array, Traveloption **trains_array)
 {
     char line[1024];
 
@@ -50,6 +50,9 @@ void csv_read()
     }
     fclose(stream);
 
+    // copy flightOptions data to flights_array memory adress
+    memcpy(*flights_array, flightOptions, sizeof(Traveloption) * 15);
+
     // opens trains file
     stream = fopen("trains.csv", "r");
     Traveloption trainOptions[14];
@@ -76,4 +79,7 @@ void csv_read()
         i++;
     }
     fclose(stream);
+
+    // copy trainOptions data to trains_array memory adress
+    memcpy(*trains_array, trainOptions, sizeof(Traveloption) * 15);
 }
