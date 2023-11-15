@@ -2,12 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-enum train_or_plaine
-{
-    TRAIN = 1,
-    AIRPLANE = 2,
-};
-
 void scan_user_input(int *, int *, int *, int *, char *, char *);
 void csv_read();
 void find_route(Traveloption *, char, char, int, int *, int *, int *, int);

@@ -50,7 +50,7 @@ void find_route(Traveloption *airplane_or_train_option, char input_startDestinat
 void calculate_option(Traveloption *airplane_or_train_option, int index1, int index2, int index3, int option) // måske index1,2,3 pointer?
 {
 
-    if (option == AIRPLANE)
+    if (option == AIRPLANE) // Præcise værdier skal ændres ud for rapporten. Særligt tag et kig på wastetime.
     {
         // Calculates CO2 emmesion
         airplane_or_train_option[index1].co2 = airplane_or_train_option[index1].distance * 246; // 246 grams of CO2 per KM on average for airplanes. (Figur 3)
