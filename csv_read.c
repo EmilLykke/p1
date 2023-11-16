@@ -8,7 +8,7 @@ char **splitString(char *line)
 {
     char *tok = strtok(line, ";");
     int i = 0;
-    char **array = (char **)malloc(5 * (6 + strlen(tok)));
+    char **array = (char **)malloc(8 * sizeof(char *));
     while (tok != NULL)
     {
         array[i] = strdup(tok);
@@ -43,15 +43,15 @@ void csv_read(Traveloption **flights_array, Traveloption **trains_array)
             sscanf(option[4], "%lf", &item.distance);
 
             flightOptions[i - 1] = item;
-
             free(tmp);
         }
         i++;
     }
     fclose(stream);
 
+    *flights_array = malloc(sizeof(Traveloption) * (i + 2));
     // copy flightOptions data to flights_array memory adress
-    memcpy(*flights_array, flightOptions, sizeof(Traveloption) * 15);
+    memcpy(*flights_array, flightOptions, sizeof(Traveloption) * (i + 2));
 
     // opens trains file
     stream = fopen("trains.csv", "r");
@@ -80,6 +80,7 @@ void csv_read(Traveloption **flights_array, Traveloption **trains_array)
     }
     fclose(stream);
 
+    *trains_array = malloc(sizeof(Traveloption) * (i + 2));
     // copy trainOptions data to trains_array memory adress
-    memcpy(*trains_array, trainOptions, sizeof(Traveloption) * 15);
+    memcpy(*trains_array, trainOptions, sizeof(Traveloption) * (i + 2));
 }
