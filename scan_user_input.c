@@ -1,6 +1,7 @@
 #include "functions.h"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 int passenger_amount();
 int ratings(int);
