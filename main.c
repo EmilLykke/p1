@@ -1,18 +1,30 @@
 #include "functions.h"
 #include <stdio.h>
 #include <string.h>
-
-void scan_user_input(int *, int *, int *, int *, char *, char *);
-void csv_read();
+#include <stdlib.h>
 
 int main(void)
 {
     char startdestination[100];
     char enddestination[100];
     int co2_rating, time_rating, price_rating, number_of_passengers;
+    Traveloption *flights_array;
+    Traveloption *trains_array;
 
-    scan_user_input(&number_of_passengers, &co2_rating, &time_rating, &price_rating, startdestination, enddestination);
-    csv_read();
+    // scan_user_input(&number_of_passengers, &co2_rating, &time_rating, &price_rating, startdestination, enddestination);
+    csv_read(&flights_array, &trains_array);
+
+    // handle if it fails
+    if (flights_array == NULL || trains_array == NULL)
+    {
+        return 1;
+    }
+
+    // test til at hente data fra arraysne
+    printf("%s \n", flights_array[1].startDest);
+
+    free(flights_array);
+    free(trains_array);
 
     return 0;
 }
