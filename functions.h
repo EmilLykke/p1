@@ -20,7 +20,7 @@ typedef struct
 void scan_user_input(int *, int *, int *, int *, char *, char *);
 
 // CSV file reader
-void csv_read(Traveloption **, Traveloption **);
+void csv_read(Traveloption **, Traveloption **, int *, int *);
 
 // Finds route and calculates remaining factors
-void find_route(Traveloption **, char *, char *, int, int *, int *, int *, int);
+Traveloption *find_route(Traveloption *, char *, char *, int, int *, int *, int *, int);
