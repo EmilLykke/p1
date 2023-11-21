@@ -18,13 +18,13 @@ char **splitString(char *line)
     return array;
 }
 
-void csv_read(Traveloption **flights_array, Traveloption **trains_array)
+void csv_read(Traveloption **flights_array, Traveloption **trains_array, int *flightSize, int *trainSize)
 {
     char line[1024];
 
     // opens flights file
     FILE *stream = fopen("flights.csv", "r");
-    Traveloption flightOptions[12];
+    Traveloption flightOptions[18];
 
     // Read lines of flights file
     int i = 0;
@@ -48,14 +48,14 @@ void csv_read(Traveloption **flights_array, Traveloption **trains_array)
         i++;
     }
     fclose(stream);
-
-    *flights_array = malloc(sizeof(Traveloption) * (i + 2));
+    *flightSize = i - 1;
+    *flights_array = malloc(sizeof(Traveloption) * (i - 1));
     // copy flightOptions data to flights_array memory adress
-    memcpy(*flights_array, flightOptions, sizeof(Traveloption) * (i + 2));
+    memcpy(*flights_array, flightOptions, sizeof(Traveloption) * (i - 1));
 
     // opens trains file
     stream = fopen("trains.csv", "r");
-    Traveloption trainOptions[14];
+    Traveloption trainOptions[18];
     // Read lines of trains file
     i = 0;
     while (fgets(line, 1024, stream))
@@ -80,7 +80,8 @@ void csv_read(Traveloption **flights_array, Traveloption **trains_array)
     }
     fclose(stream);
 
-    *trains_array = malloc(sizeof(Traveloption) * (i + 2));
+    *trainSize = i - 1;
+    *trains_array = malloc(sizeof(Traveloption) * (i - 1));
     // copy trainOptions data to trains_array memory adress
-    memcpy(*trains_array, trainOptions, sizeof(Traveloption) * (i + 2));
+    memcpy(*trains_array, trainOptions, sizeof(Traveloption) * (i - 1));
 }

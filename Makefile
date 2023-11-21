@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = 
 
 # List of C source files
-SOURCES = csv_read.c scan_user_input.c
+SOURCES = csv_read.c scan_user_input.c find_route.c
 MAIN = main.c
 # Derive object files from source files
 OBJECTS = $(SOURCES:.c=.o)
