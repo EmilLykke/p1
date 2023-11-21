@@ -39,8 +39,8 @@ void csv_read(Traveloption **flights_array, Traveloption **trains_array, int *fl
             item.startDest = option[0];
             item.endDest = option[1];
             sscanf(option[2], "%d", &item.travelTime);
-            sscanf(option[3], "%lf", &item.price);
-            sscanf(option[4], "%lf", &item.distance);
+            sscanf(option[3], "%d", &item.price);
+            sscanf(option[4], "%d", &item.distance);
 
             flightOptions[i - 1] = item;
             free(tmp);
@@ -69,8 +69,8 @@ void csv_read(Traveloption **flights_array, Traveloption **trains_array, int *fl
             item.startDest = option[0];
             item.endDest = option[1];
             sscanf(option[2], "%d", &item.travelTime);
-            sscanf(option[3], "%lf", &item.price);
-            sscanf(option[4], "%lf", &item.distance);
+            sscanf(option[3], "%d", &item.price);
+            sscanf(option[4], "%d", &item.distance);
 
             trainOptions[i - 1] = item;
 

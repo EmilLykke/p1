@@ -9,9 +9,9 @@ typedef struct
     char *startDest;
     char *endDest;
     int travelTime;
-    double price;
+    int price;
     int co2;
-    double distance;
+    int distance;
     int wasteTime;
     int totalTime;
 } Traveloption;
