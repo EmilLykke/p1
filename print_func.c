@@ -14,22 +14,44 @@ void printRoutes(Traveloption *trains, Traveloption *flights, int train_index1, 
 {
     int train_score1, train_score2, train_score3, airplane_score1, airplane_score2, airplane_score3;
 
-    // Print separator line
-    printf("Trains \t\t\t");
-    printf("Airplanes \n");
-    // printf("|------------|-----------------|--------| \t\t\t");
+    printf("%s - %s\n", flights[airplane_index1].startDest, flights[airplane_index1].endDest);
 
+    calculate_score(trains, flights, airplane_index1, airplane_index2, airplane_index3, train_index1, train_index2, train_index3, &airplane_score1, &airplane_score2, &airplane_score3, &train_score1, &train_score2, &train_score3, co2_pref, price_pref, totalTime_pref);
+
+    // Print headers
+    printf("\n\n%-20c \t\t\t Travel options:\n", ' ');
+    printf("Trains %-31c \t\t\t\t", ' ');
+    printf("Airplanes \n");
+
+    // Print separator line
     printf("|------------|-----------------|--------| \t\t\t");
     printf("|------------|-----------------|--------|\n");
 
-    calculate_score(trains, flights, airplane_index1, airplane_index2, airplane_index3, train_index1, train_index2, train_index3, &airplane_score1, &airplane_score2, &airplane_score3, &train_score1, &train_score2, &train_score3, co2_pref, price_pref, totalTime_pref);
     // Print table rows
+    // Left header
     printf("| %-10s | %-15s | %-6s | \t\t\t", "Score:", "Index", "Rank");
+    // Right reader
     printf("| %-10s | %-15s | %-6s | \n", "Score:", "Index", "Rank");
+
+    // Left splitter
+    printf("|------------|-----------------|--------| \t\t\t");
+    // Right splitter
     printf("|------------|-----------------|--------|\n");
-    printf("| %-10d | %-15d | %-6s |\n", train_score3, airplane_index3, "1");
-    printf("| %-10d | %-15d | %-6s |\n", train_score1, train_index1, "2");
-    printf("| %-10d | %-15d | %-6s |\n", airplane_score2, airplane_index2, "3");
+
+    // Left
+    printf("| %-10d | %-15d | %-6s | \t\t\t", train_score1, train_index1, "1");
+    // Right
+    printf("| %-10d | %-15d | %-6s |\n", airplane_score1, airplane_index1, "1");
+
+    // Left
+    printf("| %-10d | %-15d | %-6s | \t\t\t", train_score2, train_index2, "2");
+    // Right
+    printf("| %-10d | %-15d | %-6s |\n", airplane_score2, airplane_index2, "2");
+
+    // Left
+    printf("| %-10d | %-15d | %-6s | \t\t\t", train_score3, train_index3, "3");
+    // Right
+    printf("| %-10d | %-15d | %-6s |\n", airplane_score3, airplane_index3, "3");
 }
 
 void calculate_score(Traveloption *train, Traveloption *airplane, int airplane_index1, int airplane_index2, int airplane_index3,
@@ -46,8 +68,6 @@ void calculate_score(Traveloption *train, Traveloption *airplane, int airplane_i
     *airplane_score2 = temp_air_score2 * totalTime_pref;
     *airplane_score3 = temp_air_score3 * totalTime_pref;
 
-    printf("1: %d 2: %d 3: %d\n", *airplane_score1, *airplane_score2, *airplane_score3);
-
     *train_score1 = temp_train_score1 * totalTime_pref;
     *train_score2 = temp_train_score2 * totalTime_pref;
     *train_score3 = temp_train_score3 * totalTime_pref;
@@ -60,6 +80,7 @@ void calculate_score(Traveloption *train, Traveloption *airplane, int airplane_i
     *airplane_score2 += temp_air_score2 * price_pref;
     *airplane_score3 += temp_air_score3 * price_pref;
 
+    // printf("1: %d 2: %d 3: %d\n", *airplane_score1, *airplane_score2, *airplane_score3);
     *train_score1 += temp_train_score1 * price_pref;
     *train_score2 += temp_train_score2 * price_pref;
     *train_score3 += temp_train_score3 * price_pref;
@@ -100,47 +121,41 @@ void rank_by_parameter(int air_parametre1, int air_parametre2, int air_parametre
                 air1 = 6 + 1 - (i + 1);
             }
             // 6 number of travel options
-            printf("air 1\n");
         }
-        else if (air_parametre2 == ranking[i])
+        if (air_parametre2 == ranking[i])
         {
             if (air2 == 0)
             {
                 air2 = 6 + 1 - (i + 1);
             }
-            printf("air 2\n");
         }
-        else if (air_parametre3 == ranking[i])
+        if (air_parametre3 == ranking[i])
         {
             if (air3 == 0)
             {
                 air3 = 6 + 1 - (i + 1);
             }
-            printf("air 3\n");
         }
-        else if (train_parametre1 == ranking[i])
+        if (train_parametre1 == ranking[i])
         {
             if (train1 == 0)
             {
                 train1 = 6 + 1 - (i + 1);
             }
-            printf("train 1\n");
         }
-        else if (train_parametre2 == ranking[i])
+        if (train_parametre2 == ranking[i])
         {
             if (train2 == 0)
             {
                 train2 = 6 + 1 - (i + 1);
             }
-            printf("train 2\n");
         }
-        else if (train_parametre3 == ranking[i])
+        if (train_parametre3 == ranking[i])
         {
             if (train3 == 0)
             {
                 train3 = 6 + 1 - (i + 1);
             }
-            printf("train 3\n");
         }
     }
     *airplane_score1 = air1;

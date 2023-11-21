@@ -27,7 +27,7 @@ int main(void)
     Traveloption *flights = find_route(flights_array, startDestination, endDestination, flightSize, &airplane_index1, &airplane_index2, &airplane_index3, AIRPLANE);
 
     // test til at hente data fra arraysne
-    printf("%s - %s\n", flights[airplane_index1].startDest, flights[airplane_index1].endDest);
+    // printf("%s - %s\n", flights[airplane_index1].startDest, flights[airplane_index1].endDest);
 
     printRoutes(trains, flights, train_index1, train_index2, train_index3, airplane_index1, airplane_index2, airplane_index3, co2_rating, price_rating, time_rating);
 
