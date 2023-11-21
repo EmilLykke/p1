@@ -29,6 +29,8 @@ int main(void)
     // test til at hente data fra arraysne
     printf("%s - %s\n", flights[airplane_index1].startDest, flights[airplane_index1].endDest);
 
+    printRoutes(trains, flights, train_index1, train_index2, train_index3, airplane_index1, airplane_index2, airplane_index3);
+
     free(flights_array);
     free(trains_array);
 

@@ -24,3 +24,6 @@ void csv_read(Traveloption **, Traveloption **, int *, int *);
 
 // Finds route and calculates remaining factors
 Traveloption *find_route(Traveloption *, char *, char *, int, int *, int *, int *, int);
+
+// print routes
+void printRoutes(Traveloption *, Traveloption *, int, int, int, int, int, int);
