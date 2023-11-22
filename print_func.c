@@ -17,40 +17,28 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
     qsort(trains, 3, sizeof(Traveloption), sortScore);
     qsort(airplanes, 3, sizeof(Traveloption), sortScore);
 
-    // Print headers
-    printf("\n\n%-20c \t\t\t Travel options:\n", ' ');
-    printf("Trains %-31c \t\t\t\t", ' ');
-    printf("Airplanes \n");
+    // // Print headers
+    // printf("\n\n%-20c \t\t\t Travel options:\n", ' ');
+    // printf("Trains %-31c \t\t\t\t", ' ');
+    // printf("Airplanes \n");
 
-    // Print separator line
-    printf("|------------|-----------------|--------| \t\t\t");
-    printf("|------------|-----------------|--------|\n");
+    // Print headers
+    printf("\n\n Trains       |  Airplanes\n");
+    printf(" ╔═════════════════════════════════════════╦══════════════════════════════════════╗\n");
 
     // Print table rows
-    // Left header
-    printf("| %-10s | %-15s | %-6s | \t\t\t", "Score:", "CO2", "Rank");
-    // Right reader
-    printf("| %-10s | %-15s | %-6s | \n", "Score:", "CO2", "Rank");
+    for (int i = 0; i < 3; i++)
+    {
+        printf(" ║ Rank: %-10d                        ║ Rank: %-10d                     ║\n", i + 1, i + 1);
+        printf(" ║ Score: %-10d                       ║ Score: %-10d                    ║\n", trains[i].score, airplanes[i].score);
+        printf(" ║ CO2: %-10d                         ║ CO2: %-10d                      ║\n", trains[i].co2, airplanes[i].co2);
+        printf(" ║ Total Time: %-10d                  ║ Total Time: %-10d               ║\n", trains[i].totalTime, airplanes[i].totalTime);
+        printf(" ║ Price: %-10d                       ║ Price: %-10d                    ║\n", trains[i].price, airplanes[i].price);
+        printf(" ╠═════════════════════════════════════════╬══════════════════════════════════════╣\n");
+    }
 
-    // Left splitter
-    printf("|------------|-----------------|--------| \t\t\t");
-    // Right splitter
-    printf("|------------|-----------------|--------|\n");
-
-    // Left
-    printf("| %-10d | %-15d | %-6s | \t\t\t", trains[0].score, trains[0].co2, "1");
-    // Right
-    printf("| %-10d | %-15d | %-6s |\n", airplanes[0].score, airplanes[0].co2, "1");
-
-    // Left
-    printf("| %-10d | %-15d | %-6s | \t\t\t", trains[1].score, trains[1].co2, "2");
-    // Right
-    printf("| %-10d | %-15d | %-6s |\n", airplanes[1].score, airplanes[1].co2, "2");
-
-    // Left
-    printf("| %-10d | %-15d | %-6s | \t\t\t", trains[2].score, trains[2].co2, "3");
-    // Right
-    printf("| %-10d | %-15d | %-6s |\n", airplanes[2].score, airplanes[2].co2, "3");
+    // Bottom line
+    printf(" ╚═════════════════════════════════════════╩══════════════════════════════════════╝\n");
 }
 
 void calcualte_score(Traveloption *trains, Traveloption *airplanes, int co2_pref, int price_pref, int totalTime_pref)
@@ -89,7 +77,7 @@ void rank_by_param(Traveloption *trains, Traveloption *airplanes, int co2_pref, 
 
         for (int i = 0; i < 6; i++)
         {
-            ranking[i].score += (6 + 1 - (i + 1)) * totalTime_pref;
+            ranking[i].score += (6 + 1 - (i + 1)) * price_pref;
         }
     }
     // Type 2 = co2
