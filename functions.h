@@ -10,7 +10,7 @@ typedef struct
     char *startDest;
     char *endDest;
     int travelTime;
-    int price;
+    double price;
     int co2;
     int distance;
     int wasteTime;

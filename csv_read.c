@@ -39,7 +39,7 @@ void csv_read(Traveloption **airplanes_array, Traveloption **trains_array, int *
             item.startDest = option[0];
             item.endDest = option[1];
             sscanf(option[2], "%d", &item.travelTime);
-            sscanf(option[3], "%d", &item.price);
+            sscanf(option[3], "%lf", &item.price);
             sscanf(option[4], "%d", &item.distance);
 
             // This is going to be used in the calcualte function
@@ -75,7 +75,7 @@ void csv_read(Traveloption **airplanes_array, Traveloption **trains_array, int *
             item.startDest = option[0];
             item.endDest = option[1];
             sscanf(option[2], "%d", &item.travelTime);
-            sscanf(option[3], "%d", &item.price);
+            sscanf(option[3], "%lf", &item.price);
             sscanf(option[4], "%d", &item.distance);
 
             // This is going to be used in the calcualte function

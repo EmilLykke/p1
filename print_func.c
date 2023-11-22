@@ -33,7 +33,7 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
         printf(" ║ Score: %-10d                       ║ Score: %-10d                    ║\n", trains[i].score, airplanes[i].score);
         printf(" ║ CO2: %-10d                         ║ CO2: %-10d                      ║\n", trains[i].co2, airplanes[i].co2);
         printf(" ║ Total Time: %-10d                  ║ Total Time: %-10d               ║\n", trains[i].totalTime, airplanes[i].totalTime);
-        printf(" ║ Price: %-10d                       ║ Price: %-10d                    ║\n", trains[i].price, airplanes[i].price);
+        printf(" ║ Price: %-10.2lf                       ║ Price: %-10.2lf                    ║\n", trains[i].price, airplanes[i].price);
         printf(" ╠═════════════════════════════════════════╬══════════════════════════════════════╣\n");
     }
 
