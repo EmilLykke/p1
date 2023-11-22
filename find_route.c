@@ -54,13 +54,13 @@ Traveloption *calculate_option(Traveloption *airplane_or_train_option, int *inde
     if (option == AIRPLANE) // Præcise værdier skal ændres ud for rapporten. Særligt tag et kig på wasteTime
     {
         // Calculates CO2 emmesion
-        tempArr[*index1].co2 = tempArr[*index1].distance * 246; // 246 grams of CO2 per KM on average for airplanes (Figur 3)
-        tempArr[*index2].co2 = tempArr[*index2].distance * 246;
-        tempArr[*index3].co2 = tempArr[*index3].distance * 246;
+        tempArr[*index1].co2 = tempArr[*index1].distance * 246.; // 246 grams of CO2 per KM on average for airplanes (Figur 3)
+        tempArr[*index2].co2 = tempArr[*index2].distance * 246.;
+        tempArr[*index3].co2 = tempArr[*index3].distance * 246.;
 
-        tempArr[*index1].wasteTime = 165; // 165 minutes averaged on downtime for airplanes
-        tempArr[*index2].wasteTime = 165;
-        tempArr[*index3].wasteTime = 165;
+        tempArr[*index1].wasteTime = 240; // 165 minutes averaged on downtime for airplanes
+        tempArr[*index2].wasteTime = 240;
+        tempArr[*index3].wasteTime = 240;
 
         tempArr[*index1].totalTime = tempArr[*index1].wasteTime + tempArr[*index1].travelTime; // travelTime + downtime
         tempArr[*index2].totalTime = tempArr[*index2].wasteTime + tempArr[*index2].travelTime;
@@ -69,13 +69,13 @@ Traveloption *calculate_option(Traveloption *airplane_or_train_option, int *inde
 
     else if (option == TRAIN)
     {
-        tempArr[*index1].co2 = tempArr[*index1].distance * 0; // 0 grams of CO2 per KM in German trains ()
-        tempArr[*index2].co2 = tempArr[*index2].distance * 0;
-        tempArr[*index3].co2 = tempArr[*index3].distance * 0;
+        tempArr[*index1].co2 = tempArr[*index1].distance * 0.; // 0 grams of CO2 per KM in German trains ()
+        tempArr[*index2].co2 = tempArr[*index2].distance * 0.;
+        tempArr[*index3].co2 = tempArr[*index3].distance * 0.;
 
-        tempArr[*index1].wasteTime = 20; // average wasteTime for train
-        tempArr[*index2].wasteTime = 20;
-        tempArr[*index3].wasteTime = 20;
+        tempArr[*index1].wasteTime = 35; // average wasteTime for train
+        tempArr[*index2].wasteTime = 35;
+        tempArr[*index3].wasteTime = 35;
 
         tempArr[*index1].totalTime = tempArr[*index1].wasteTime + tempArr[*index1].travelTime; // travelTime + downtime
         tempArr[*index2].totalTime = tempArr[*index2].wasteTime + tempArr[*index2].travelTime;

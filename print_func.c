@@ -30,8 +30,8 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
     for (int i = 0; i < 3; i++)
     {
         printf(" ║ Rank: %-10d                        ║ Rank: %-10d                     ║\n", i + 1, i + 1);
-        printf(" ║ Score: %-10d                       ║ Score: %-10d                    ║\n", trains[i].score, airplanes[i].score);
-        printf(" ║ CO2: %-10d                         ║ CO2: %-10d                      ║\n", trains[i].co2, airplanes[i].co2);
+        printf(" ║ Score: %-10.2lf                       ║ Score: %-10.2lf                    ║\n", trains[i].score, airplanes[i].score);
+        printf(" ║ CO2: %-10.2lf                         ║ CO2: %-10.2lf                      ║\n", trains[i].co2, airplanes[i].co2);
         printf(" ║ Total Time: %-10d                  ║ Total Time: %-10d               ║\n", trains[i].totalTime, airplanes[i].totalTime);
         printf(" ║ Price: %-10.2lf                       ║ Price: %-10.2lf                    ║\n", trains[i].price, airplanes[i].price);
         printf(" ╠═════════════════════════════════════════╬══════════════════════════════════════╣\n");
@@ -120,11 +120,11 @@ int sortTotalTime(const void *ip1, const void *ip2)
     Traveloption *ipi1, *ipi2;
     ipi1 = (Traveloption *)ip1;
     ipi2 = (Traveloption *)ip2;
-    if (ipi1->totalTime > ipi2->totalTime)
+    if (ipi1->totalTime < ipi2->totalTime)
     {
         return -1;
     }
-    else if (ipi2->totalTime > ipi1->totalTime)
+    else if (ipi2->totalTime < ipi1->totalTime)
     {
         return 1;
     }
@@ -139,11 +139,11 @@ int sortPrice(const void *ip1, const void *ip2)
     Traveloption *ipi1, *ipi2;
     ipi1 = (Traveloption *)ip1;
     ipi2 = (Traveloption *)ip2;
-    if (ipi1->price > ipi2->price)
+    if (ipi1->price < ipi2->price)
     {
         return -1;
     }
-    else if (ipi2->price > ipi1->price)
+    else if (ipi2->price < ipi1->price)
     {
         return 1;
     }

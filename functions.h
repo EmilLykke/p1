@@ -11,11 +11,11 @@ typedef struct
     char *endDest;
     int travelTime;
     double price;
-    int co2;
-    int distance;
+    double co2;
+    double distance;
     int wasteTime;
     int totalTime;
-    int score;
+    double score;
     int type;
 
 } Traveloption;
