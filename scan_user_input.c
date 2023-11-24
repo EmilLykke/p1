@@ -3,24 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-int passenger_amount();
 int ratings(int);
 void startpoint_and_destination(char *, char *);
-
-int passenger_amount()
-{
-    int amount;
-
-    printf("How many travelers are you planning to travel with? Between 1-100. (Including yourself): ");
-    scanf(" %d", &amount);
-
-    while (amount < 0 || amount > 100)
-    {
-        printf("\nError: Must input between 1-100, try again: ");
-        scanf("%d", &amount);
-    }
-    return amount;
-}
 
 int ratings(int question)
 {
@@ -57,7 +41,7 @@ int ratings(int question)
 
 void startpoint_and_destination(char *start, char *end)
 {
-    printf("Input your starting destination: ");
+    printf("\nInput your starting destination: ");
     scanf("%s", start);
 
     printf("\nInput your end destination: ");
@@ -67,10 +51,8 @@ void startpoint_and_destination(char *start, char *end)
     toupper(end[0]);
 }
 
-void scan_user_input(int *number_of_passengers, int *co2_rating, int *time_rating, int *price_rating, char *start, char *end)
+void scan_user_input(int *co2_rating, int *time_rating, int *price_rating, char *start, char *end)
 {
-
-    *number_of_passengers = passenger_amount();
 
     *co2_rating = ratings(1);
     *time_rating = ratings(2);

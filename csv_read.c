@@ -18,15 +18,15 @@ char **splitString(char *line)
     return array;
 }
 
-void csv_read(Traveloption **flights_array, Traveloption **trains_array, int *flightSize, int *trainSize)
+void csv_read(Traveloption **airplanes_array, Traveloption **trains_array, int *airplaneSize, int *trainSize)
 {
     char line[1024];
 
-    // opens flights file
-    FILE *stream = fopen("flights.csv", "r");
-    Traveloption flightOptions[18];
+    // opens airplanes file
+    FILE *stream = fopen("airplanes.csv", "r");
+    Traveloption airplaneOptions[18];
 
-    // Read lines of flights file
+    // Read lines of airplanes file
     int i = 0;
     while (fgets(line, 1024, stream))
     {
@@ -42,16 +42,22 @@ void csv_read(Traveloption **flights_array, Traveloption **trains_array, int *fl
             sscanf(option[3], "%lf", &item.price);
             sscanf(option[4], "%lf", &item.distance);
 
-            flightOptions[i - 1] = item;
+            // This is going to be used in the calcualte function
+            item.score = 0;
+
+            // Set type
+            item.type = AIRPLANE;
+
+            airplaneOptions[i - 1] = item;
             free(tmp);
         }
         i++;
     }
     fclose(stream);
-    *flightSize = i - 1;
-    *flights_array = malloc(sizeof(Traveloption) * (i - 1));
-    // copy flightOptions data to flights_array memory adress
-    memcpy(*flights_array, flightOptions, sizeof(Traveloption) * (i - 1));
+    *airplaneSize = i - 1;
+    *airplanes_array = malloc(sizeof(Traveloption) * (i - 1));
+    // copy airplaneOptions data to airplanes_array memory adress
+    memcpy(*airplanes_array, airplaneOptions, sizeof(Traveloption) * (i - 1));
 
     // opens trains file
     stream = fopen("trains.csv", "r");
@@ -71,6 +77,12 @@ void csv_read(Traveloption **flights_array, Traveloption **trains_array, int *fl
             sscanf(option[2], "%d", &item.travelTime);
             sscanf(option[3], "%lf", &item.price);
             sscanf(option[4], "%lf", &item.distance);
+
+            // This is going to be used in the calcualte function
+            item.score = 0;
+
+            // Set type
+            item.type = TRAIN;
 
             trainOptions[i - 1] = item;
 
