@@ -44,6 +44,7 @@ void csv_read(Traveloption **airplanes_array, Traveloption **trains_array, int *
 
             // This is going to be used in the calcualte function
             item.score = 0;
+            item.rank = 1;
 
             // Set type
             item.type = AIRPLANE;
@@ -80,6 +81,7 @@ void csv_read(Traveloption **airplanes_array, Traveloption **trains_array, int *
 
             // This is going to be used in the calcualte function
             item.score = 0;
+            item.rank = 1;
 
             // Set type
             item.type = TRAIN;

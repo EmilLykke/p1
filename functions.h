@@ -17,6 +17,7 @@ typedef struct
     int totalTime;
     double score;
     int type;
+    int rank;
 
 } Traveloption;
 
