@@ -21,7 +21,7 @@ typedef struct
 } Traveloption;
 
 // Scans user input
-void scan_user_input(int *, int *, int *, int *, char *, char *);
+void scan_user_input(int *, int *, int *, char *, char *);
 
 // CSV file reader
 void csv_read(Traveloption **, Traveloption **, int *, int *);

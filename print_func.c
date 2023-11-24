@@ -22,10 +22,10 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
     // printf("Trains %-31c \t\t\t\t", ' ');
     // printf("Airplanes \n");
 
+    printf("\n\n ╔═════════════════════════════════════════╦══════════════════════════════════════╗\n");
     // Print headers
-    printf("\n\n Trains       |  Airplanes\n");
-    printf(" ╔═════════════════════════════════════════╦══════════════════════════════════════╗\n");
-
+    printf(" ║ Trains                                  ║ Airplanes                            ║\n");
+    printf(" ╠═════════════════════════════════════════╬══════════════════════════════════════╣\n");
     // Print table rows
     for (int i = 0; i < 3; i++)
     {
