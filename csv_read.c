@@ -40,19 +40,12 @@ void csv_read(Traveloption *airplanes_array, Traveloption *trains_array)
 void scanLine(char *line, Traveloption *arr, int type, int index)
 {
 
-    char start[100];
-    char end[100];
-
-    sscanf(line, " %[^;];%[^;];%d;%lf;%lf;", start, end, &arr[index].travelTime, &arr[index].price, &arr[index].distance);
-
     // Memory is allocated for the start and end dest
-    // The string is copied into the item
     // Due to the fact that the struct has defined start and end dest as char *
-    // and strings cannot be asigned directly
     arr[index].startDest = malloc(100);
     arr[index].endDest = malloc(100);
-    strcpy(arr[index].startDest, start);
-    strcpy(arr[index].endDest, end);
+
+    sscanf(line, " %[^;];%[^;];%d;%lf;%lf;", arr[index].startDest, arr[index].endDest, &arr[index].travelTime, &arr[index].price, &arr[index].distance);
 
     // Sets the score and rank for later use
     arr[index].score = 0;
