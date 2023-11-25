@@ -3,28 +3,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-// Returns an array of the different sections of the string
-char **splitString(char *line)
-{
-    char *tok = strtok(line, ";");
-    int i = 0;
-    char **array = (char **)malloc(8 * sizeof(char *));
-    while (tok != NULL)
-    {
-        array[i] = strdup(tok);
-        tok = strtok(NULL, ";");
-        i++;
-    }
-    return array;
-}
+void scanLine(char *, Traveloption *, int, int);
 
-void csv_read(Traveloption **airplanes_array, Traveloption **trains_array, int *airplaneSize, int *trainSize)
+void csv_read(Traveloption *airplanes_array, Traveloption *trains_array)
 {
     char line[1024];
-
     // opens airplanes file
     FILE *stream = fopen("airplanes.csv", "r");
-    Traveloption airplaneOptions[18];
 
     // Read lines of airplanes file
     int i = 0;
@@ -32,70 +17,67 @@ void csv_read(Traveloption **airplanes_array, Traveloption **trains_array, int *
     {
         if (i != 0)
         {
-            char *tmp = strdup(line);
-            Traveloption item;
-            char **option = splitString(tmp);
-
-            item.startDest = option[0];
-            item.endDest = option[1];
-            sscanf(option[2], "%d", &item.travelTime);
-            sscanf(option[3], "%lf", &item.price);
-            sscanf(option[4], "%lf", &item.distance);
-
-            // This is going to be used in the calcualte function
-            item.score = 0;
-            item.rank = 1;
-
-            // Set type
-            item.type = AIRPLANE;
-
-            airplaneOptions[i - 1] = item;
-            free(tmp);
+            scanLine(line, airplanes_array, AIRPLANE, i - 1);
         }
         i++;
     }
     fclose(stream);
-    *airplaneSize = i - 1;
-    *airplanes_array = malloc(sizeof(Traveloption) * (i - 1));
-    // copy airplaneOptions data to airplanes_array memory adress
-    memcpy(*airplanes_array, airplaneOptions, sizeof(Traveloption) * (i - 1));
 
     // opens trains file
     stream = fopen("trains.csv", "r");
-    Traveloption trainOptions[18];
-    // Read lines of trains file
     i = 0;
     while (fgets(line, 1024, stream))
     {
         if (i != 0)
         {
-            char *tmp = strdup(line);
-            Traveloption item;
-            char **option = splitString(tmp);
-
-            item.startDest = option[0];
-            item.endDest = option[1];
-            sscanf(option[2], "%d", &item.travelTime);
-            sscanf(option[3], "%lf", &item.price);
-            sscanf(option[4], "%lf", &item.distance);
-
-            // This is going to be used in the calcualte function
-            item.score = 0;
-            item.rank = 1;
-
-            // Set type
-            item.type = TRAIN;
-
-            trainOptions[i - 1] = item;
-
-            free(tmp);
+            scanLine(line, trains_array, TRAIN, i - 1);
         }
         i++;
     }
     fclose(stream);
+}
 
+void scanLine(char *line, Traveloption *arr, int type, int index)
+{
+
+    char start[100];
+    char end[100];
+
+    sscanf(line, " %[^;];%[^;];%d;%lf;%lf;", start, end, &arr[index].travelTime, &arr[index].price, &arr[index].distance);
+
+    // Memory is allocated for the start and end dest
+    // The string is copied into the item
+    // Due to the fact that the struct has defined start and end dest as char *
+    // and strings cannot be asigned directly
+    arr[index].startDest = malloc(100);
+    arr[index].endDest = malloc(100);
+    strcpy(arr[index].startDest, start);
+    strcpy(arr[index].endDest, end);
+
+    // Sets the score and rank for later use
+    arr[index].score = 0;
+    arr[index].rank = 0;
+
+    // Set type
+    arr[index].type = type;
+}
+
+void getNumberOfLines(int *airplaneSize, int *trainSize)
+{
+    char line[1024];
+    FILE *stream = fopen("airplanes.csv", "r");
+    int i = 0;
+    while (fgets(line, 1024, stream))
+    {
+        i++;
+    }
+    *airplaneSize = i - 1;
+
+    stream = fopen("trains.csv", "r");
+    i = 0;
+    while (fgets(line, 1024, stream))
+    {
+        i++;
+    }
     *trainSize = i - 1;
-    *trains_array = malloc(sizeof(Traveloption) * (i - 1));
-    // copy trainOptions data to trains_array memory adress
-    memcpy(*trains_array, trainOptions, sizeof(Traveloption) * (i - 1));
 }

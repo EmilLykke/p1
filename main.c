@@ -26,13 +26,18 @@ int main(void)
         char startDestination[100];
         char endDestination[100];
         int co2_rating, time_rating, price_rating;
-        Traveloption *airplanes_array;
-        Traveloption *trains_array;
-        int train_index1 = -1, train_index2 = -1, train_index3 = -1, airplane_index1 = -1, airplane_index2 = -1, airplane_index3 = -1;
         int airplaneSize = 0, trainSize = 0;
 
+        getNumberOfLines(&airplaneSize, &trainSize);
+
+        Traveloption *airplanes_array = malloc(airplaneSize * sizeof(Traveloption));
+        Traveloption *trains_array = malloc(trainSize * sizeof(Traveloption));
+
+        int train_index1 = -1, train_index2 = -1, train_index3 = -1, airplane_index1 = -1, airplane_index2 = -1, airplane_index3 = -1;
+
         scan_user_input(&co2_rating, &time_rating, &price_rating, startDestination, endDestination);
-        csv_read(&airplanes_array, &trains_array, &airplaneSize, &trainSize);
+
+        csv_read(airplanes_array, trains_array);
 
         // handle if it fails
         if (airplanes_array == NULL || trains_array == NULL)
@@ -48,7 +53,7 @@ int main(void)
         Traveloption topAirplanes[] = {airplanes[airplane_index1], airplanes[airplane_index2], airplanes[airplane_index3]};
 
         // test til at hente data fra arraysne
-        // printf("%s - %s\n", airplanes[airplane_index1].startDest, airplanes[airplane_index1].endDest);
+        printf("%s - %s\n", airplanes[airplane_index1].startDest, airplanes[airplane_index1].endDest);
 
         printRoutes(topTrain, topAirplanes, co2_rating, price_rating, time_rating);
 
