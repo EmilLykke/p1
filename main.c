@@ -26,13 +26,14 @@ int main(void)
         char startDestination[100];
         char endDestination[100];
         int co2_rating, time_rating, price_rating;
-        Traveloption *airplanes_array;
-        Traveloption *trains_array;
         int train_index1 = -1, train_index2 = -1, train_index3 = -1, airplane_index1 = -1, airplane_index2 = -1, airplane_index3 = -1;
-        int airplaneSize = 0, trainSize = 0;
 
         scan_user_input(&co2_rating, &time_rating, &price_rating, startDestination, endDestination);
-        csv_read(&airplanes_array, &trains_array, &airplaneSize, &trainSize);
+
+        int airplaneSize = 0, trainSize = 0;
+
+        Traveloption *airplanes_array = csv_read("airplanes.csv", &airplaneSize, AIRPLANE);
+        Traveloption *trains_array = csv_read("trains.csv", &trainSize, TRAIN);
 
         // handle if it fails
         if (airplanes_array == NULL || trains_array == NULL)
@@ -40,20 +41,19 @@ int main(void)
             return 1;
         }
 
-        Traveloption *trains = find_route(trains_array, startDestination, endDestination, trainSize, &train_index1, &train_index2, &train_index3, TRAIN);
-
         Traveloption *airplanes = find_route(airplanes_array, startDestination, endDestination, airplaneSize, &airplane_index1, &airplane_index2, &airplane_index3, AIRPLANE);
+
+        Traveloption *trains = find_route(trains_array, startDestination, endDestination, trainSize, &train_index1, &train_index2, &train_index3, TRAIN);
 
         Traveloption topTrain[] = {trains[train_index1], trains[train_index2], trains[train_index3]};
         Traveloption topAirplanes[] = {airplanes[airplane_index1], airplanes[airplane_index2], airplanes[airplane_index3]};
-
-        // test til at hente data fra arraysne
-        // printf("%s - %s\n", airplanes[airplane_index1].startDest, airplanes[airplane_index1].endDest);
 
         printRoutes(topTrain, topAirplanes, co2_rating, price_rating, time_rating);
 
         free(airplanes_array);
         free(trains_array);
+        free(airplanes);
+        free(trains);
     }
 
     return 0;

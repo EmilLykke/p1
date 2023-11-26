@@ -17,6 +17,7 @@ typedef struct
     int totalTime;
     double score;
     int type;
+    int rank;
 
 } Traveloption;
 
@@ -24,7 +25,7 @@ typedef struct
 void scan_user_input(int *, int *, int *, char *, char *);
 
 // CSV file reader
-void csv_read(Traveloption **, Traveloption **, int *, int *);
+Traveloption *csv_read(char *, int *, int);
 
 // Finds route and calculates remaining factors
 Traveloption *find_route(Traveloption *, char *, char *, int, int *, int *, int *, int);

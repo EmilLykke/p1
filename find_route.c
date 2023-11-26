@@ -4,7 +4,7 @@
 #include <limits.h>
 #include <stdlib.h>
 
-Traveloption *calculate_option(Traveloption *, int *, int *, int *, int);
+Traveloption *calculate_option(Traveloption *, int, int *, int *, int *, int);
 
 Traveloption *find_route(Traveloption *airplane_or_train_option, char *input_startDestination, char *input_endDestination,
                          int size, int *index1, int *index2, int *index3, int option)
@@ -42,14 +42,14 @@ Traveloption *find_route(Traveloption *airplane_or_train_option, char *input_sta
         }
     }
 
-    airplane_or_train_option = calculate_option(airplane_or_train_option, index1, index2, index3, option); // index 3 quickest, 2 2nd and index 1 is the slowest
+    airplane_or_train_option = calculate_option(airplane_or_train_option, size, index1, index2, index3, option); // index 3 quickest, 2 2nd and index 1 is the slowest
     return airplane_or_train_option;
 }
 
-Traveloption *calculate_option(Traveloption *airplane_or_train_option, int *index1, int *index2, int *index3, int option) // måske index1,2,3 pointer?
+Traveloption *calculate_option(Traveloption *airplane_or_train_option, int size, int *index1, int *index2, int *index3, int option) // måske index1,2,3 pointer?
 {
-    Traveloption *tempArr = malloc(sizeof(Traveloption) * 18);
-    memcpy(tempArr, airplane_or_train_option, sizeof(Traveloption) * 18);
+    Traveloption *tempArr = malloc(sizeof(Traveloption) * size);
+    memcpy(tempArr, airplane_or_train_option, sizeof(Traveloption) * size);
 
     if (option == AIRPLANE) // Præcise værdier skal ændres ud for rapporten. Særligt tag et kig på wasteTime
     {
