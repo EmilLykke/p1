@@ -16,20 +16,20 @@ Traveloption *csv_read(char *filename, int *size, int type)
         exit(EXIT_FAILURE);
     }
 
-    int m = 0;
+    int i = 0;
 
     while (fgets(line, sizeof(line), stream))
     {
-        m++;
+        i++;
     }
 
-    *size = m - 1;
+    *size = i - 1;
 
     Traveloption *airplane_or_train_array = (Traveloption *)malloc((*size) * sizeof(Traveloption));
 
     rewind(stream);
 
-    int i = 0;
+    i = 0;
     // Read lines of airplanes file
     while (fgets(line, sizeof(line), stream))
     {
