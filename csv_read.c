@@ -5,36 +5,44 @@
 
 void scanLine(char *, Traveloption *, int, int);
 
-void csv_read(Traveloption *airplanes_array, Traveloption *trains_array)
+Traveloption *csv_read(char *filename, int *size, int type)
 {
     char line[1024];
-    // opens airplanes file
-    FILE *stream = fopen("airplanes.csv", "r");
+    // opens file
+    FILE *stream = fopen(filename, "r");
+    if (stream == NULL)
+    {
+        printf("Failed to open: %s", filename);
+        exit(EXIT_FAILURE);
+    }
 
-    // Read lines of airplanes file
+    int m = 0;
+
+    while (fgets(line, sizeof(line), stream))
+    {
+        m++;
+    }
+
+    *size = m - 1;
+
+    Traveloption *airplane_or_train_array = (Traveloption *)malloc((*size) * sizeof(Traveloption));
+
+    rewind(stream);
+
     int i = 0;
-    while (fgets(line, 1024, stream))
+    // Read lines of airplanes file
+    while (fgets(line, sizeof(line), stream))
     {
         if (i != 0)
         {
-            scanLine(line, airplanes_array, AIRPLANE, i - 1);
+            scanLine(line, airplane_or_train_array, type, i - 1);
         }
         i++;
     }
+
     fclose(stream);
 
-    // opens trains file
-    stream = fopen("trains.csv", "r");
-    i = 0;
-    while (fgets(line, 1024, stream))
-    {
-        if (i != 0)
-        {
-            scanLine(line, trains_array, TRAIN, i - 1);
-        }
-        i++;
-    }
-    fclose(stream);
+    return airplane_or_train_array;
 }
 
 void scanLine(char *line, Traveloption *arr, int type, int index)
@@ -42,10 +50,10 @@ void scanLine(char *line, Traveloption *arr, int type, int index)
 
     // Memory is allocated for the start and end dest
     // Due to the fact that the struct has defined start and end dest as char *
-    arr[index].startDest = malloc(100);
-    arr[index].endDest = malloc(100);
+    arr[index].startDest = (char *)malloc(100);
+    arr[index].endDest = (char *)malloc(100);
 
-    sscanf(line, " %[^;];%[^;];%d;%lf;%lf;", arr[index].startDest, arr[index].endDest, &arr[index].travelTime, &arr[index].price, &arr[index].distance);
+    sscanf(line, "%[^;];%[^;];%d;%lf;%lf;", arr[index].startDest, arr[index].endDest, &arr[index].travelTime, &arr[index].price, &arr[index].distance);
 
     // Sets the score and rank for later use
     arr[index].score = 0;
@@ -53,24 +61,4 @@ void scanLine(char *line, Traveloption *arr, int type, int index)
 
     // Set type
     arr[index].type = type;
-}
-
-void getNumberOfLines(int *airplaneSize, int *trainSize)
-{
-    char line[1024];
-    FILE *stream = fopen("airplanes.csv", "r");
-    int i = 0;
-    while (fgets(line, 1024, stream))
-    {
-        i++;
-    }
-    *airplaneSize = i - 1;
-
-    stream = fopen("trains.csv", "r");
-    i = 0;
-    while (fgets(line, 1024, stream))
-    {
-        i++;
-    }
-    *trainSize = i - 1;
 }

@@ -25,8 +25,7 @@ typedef struct
 void scan_user_input(int *, int *, int *, char *, char *);
 
 // CSV file reader
-void getNumberOfLines(int *, int *);
-void csv_read(Traveloption *, Traveloption *);
+Traveloption *csv_read(char *, int *, int);
 
 // Finds route and calculates remaining factors
 Traveloption *find_route(Traveloption *, char *, char *, int, int *, int *, int *, int);
