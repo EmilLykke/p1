@@ -4,6 +4,7 @@
 
 int sortTotalTime(const void *, const void *);
 int sortPrice(const void *, const void *);
+int sortCo2(const void *, const void *);
 int sortScore(const void *, const void *);
 void setRank(Traveloption *, int);
 
@@ -92,16 +93,16 @@ void rank_by_param(Traveloption *trains, Traveloption *airplanes, int co2_pref, 
     // Type 2 = co2
     else if (type == 2)
     {
+        qsort(ranking, 6, sizeof(Traveloption), sortCo2);
+
         for (int i = 0; i < 6; i++)
         {
-            if (ranking[i].type == TRAIN)
-            {
-                ranking[i].score += 6 * co2_pref;
-            }
-            else if (ranking[i].type == AIRPLANE)
-            {
-                ranking[i].score += 1 * co2_pref;
-            }
+            setRank(ranking, 2);
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            ranking[i].score += (6 + 1 - (ranking[i].rank)) * co2_pref;
         }
     }
 
@@ -165,6 +166,25 @@ int sortPrice(const void *ip1, const void *ip2)
     }
 }
 
+int sortCo2(const void *ip1, const void *ip2)
+{
+    Traveloption *ipi1, *ipi2;
+    ipi1 = (Traveloption *)ip1;
+    ipi2 = (Traveloption *)ip2;
+    if (ipi1->co2 < ipi2->co2)
+    {
+        return -1;
+    }
+    else if (ipi2->co2 < ipi1->co2)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 int sortScore(const void *ip1, const void *ip2)
 {
     Traveloption *ipi1, *ipi2;
@@ -207,6 +227,13 @@ void setRank(Traveloption *arr, int type)
             else if (type == 1)
             {
                 if (arr[i].price == arr[i + 1].price)
+                {
+                    arr[i + 1].rank = arr[i].rank;
+                }
+            }
+            else if (type == 2)
+            {
+                if (arr[i].co2 == arr[i + 1].co2)
                 {
                     arr[i + 1].rank = arr[i].rank;
                 }
