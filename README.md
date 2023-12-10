@@ -1,16 +1,24 @@
 # p1
 
+## Description
+This is a C-program which is capable of selecting and ranking airplane and train routes in Germany.
+The program is a representation of how a real world application could work which is why it retrieves its data from at fixed dataset.
+
 ## How to run program
 
-Run the following command in your terminal
+Assuming you have already downloaded the program folder and navigated to it in your terminal run the following command. 
 
 `make clean && make`
 
-If you want to be extra cool you can run following command:
+Then
+
+`./main`
+
+If you want to skip a step run:
 
 `make clean && make && ./main`
 
-And if you want to be "El Hombre" you can run:
+And if you want to test the program with predefined input run:
 
 `make clean && make && ./main < temp.txt`
 
