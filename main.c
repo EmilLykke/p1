@@ -3,24 +3,34 @@
 #include <string.h>
 #include <stdlib.h>
 
+void printHelp();
+
 int main(void)
 {
     char run;
-    printf("\nWelcome to TravInfo with Group 7. (Demo)\n");
+    printf("\n\nWelcome to TravInfo. (Demo)\n\n");
+    printf("------------------------------------------------------------------\n");
     printf("This program will provide information about travel routes in Germany\n");
     printf("and display indepth details about the best route for you based on your preferences.\n");
-    printf("Follow the provided steps below with 5 being the best and 1 being worst.\n");
+    printf("Follow the provided steps below to see travel recomendations.\nFirstly you will be asked to declare how much you care about given parametres when choosing your travel form. \n");
+    printf("where 5 indicates high significance or strong emphasis, and 1 indicates low significance or minimal emphasis.");
+
     while (1)
     {
         do
         {
-            printf("\ns to start, q to quit: ");
+            printf("\n\nPress s to start, q to quit, press h for more help/info regarding the displayed table: ");
             scanf(" %c", &run);
-        } while (run != 's' && run != 'q');
+        } while (run != 's' && run != 'q' && run != 'h');
 
         if (run == 'q')
         {
             break;
+        }
+
+        if (run == 'h')
+        {
+            printHelp();
         }
 
         char startDestination[100];
@@ -57,4 +67,26 @@ int main(void)
     }
 
     return 0;
+}
+
+void printHelp()
+{
+    printf("\n\n------------------------------------------------------------------\n");
+    printf("\nRank\n");
+    printf("\n\t- The routes are ranked according to their given score\n\n");
+
+    printf("Score (the higher the better)\n");
+    printf("\n\t- The scoring system incorporates the information you've submitted within each category, calculating it against the personalized available routes.\n\t A higher score signifies a route better fitted to meet your preferences. The score is not out of 100 but should just be read as; the higher the better.\n\n");
+
+    printf("CO2 (in grams per person)\n");
+    printf("\n\t- The CO2 emission is calculated by multiplying the average CO2 emission for both trains and airplanes.\n\t With the average CO2 emission pr KM for trains being 0 and airplanes 246 gram. (for context people emit 3.2 pounds of Co2 a day on average)\n\n");
+
+    printf("Total time (in hours/minutes)\n");
+    printf("\n\t- In total time we include the expected waste time, meaning the expected time in the airport, the average delay for airplanes/trains, and your trip to the airport/station.\n");
+    printf("\t- Wastetime is on average for airplanes 4 hours (240 minutes) and trains 35 minutes.\n\n");
+
+    printf("Price (in euro)\n");
+    printf("\n\t- Shows the ticket price for the specific travel option in euros.\n\n");
+    printf("------------------------------------------------------------------\n");
+    printf("\n\n");
 }

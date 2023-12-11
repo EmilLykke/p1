@@ -7,6 +7,7 @@ int sortPrice(const void *, const void *);
 int sortCo2(const void *, const void *);
 int sortScore(const void *, const void *);
 void setRank(Traveloption *, int);
+char optionLetter(int);
 
 void rank_by_param(Traveloption *, Traveloption *, int, int, int, int);
 void calcualte_score(Traveloption *, Traveloption *, int, int, int);
@@ -16,28 +17,26 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
 
     calcualte_score(trains, airplanes, co2_pref, price_pref, totalTime_pref);
 
-    // // Print headers
-    // printf("\n\n%-20c \t\t\t Travel options:\n", ' ');
-    // printf("Trains %-31c \t\t\t\t", ' ');
-    // printf("Airplanes \n");
+    printf("\n\n\nThe table below displays options A, B, and C for each travel route (airplane or train option) leading to your destination.\nEach route is ranked from 1 to 6 and is detailed with information regarding its parameters.\nStill confused? Press 'h' below");
 
-    printf("\n\n ╔═════════════════════════════════════════╦══════════════════════════════════════╗\n");
+    printf("\n\n ╔═══════════════════════════════════════════╦════════════════════════════════════════╗\n");
     // Print headers
-    printf(" ║ Trains                                  ║ Airplanes                            ║\n");
-    printf(" ╠═════════════════════════════════════════╬══════════════════════════════════════╣\n");
+    printf(" ║ Trains                                    ║ Airplanes                              ║\n");
+    printf(" ╠═══════════════════════════════════════════╬════════════════════════════════════════╣\n");
     // Print table rows
     for (int i = 0; i < 3; i++)
     {
-        printf(" ║ Rank: %-10d                        ║ Rank: %-10d                     ║\n", trains[i].rank, airplanes[i].rank);
-        printf(" ║ Score: %-10.2lf                       ║ Score: %-10.2lf                    ║\n", trains[i].score, airplanes[i].score);
-        printf(" ║ CO2: %-10.2lf                         ║ CO2: %-10.2lf                      ║\n", trains[i].co2, airplanes[i].co2);
-        printf(" ║ Total Time: %-10d                  ║ Total Time: %-10d               ║\n", trains[i].totalTime, airplanes[i].totalTime);
-        printf(" ║ Price: %-10.2lf                       ║ Price: %-10.2lf                    ║\n", trains[i].price, airplanes[i].price);
-        printf(" ╠═════════════════════════════════════════╬══════════════════════════════════════╣\n");
+        printf(" ║                Option %c                   ║                 Option %c               ║\n", optionLetter(i), optionLetter(i));
+        printf(" ║ Rank: %-10d                          ║ Rank: %-10d                       ║\n", trains[i].rank, airplanes[i].rank);
+        printf(" ║ Score: %-10.2lf                         ║ Score: %-10.2lf                      ║\n", trains[i].score, airplanes[i].score);
+        printf(" ║ CO2 (grams emitted/per person): %-5.2lf     ║ CO2 (grams emitted/per person): %-7.1lf║\n", trains[i].co2, airplanes[i].co2);
+        printf(" ║ Total Time (in minutes): %-10d       ║ Total Time (in minutes): %-10d    ║\n", trains[i].totalTime, airplanes[i].totalTime);
+        printf(" ║ Price (in euros): %-10.2lf              ║ Price (in euros): %-10.2lf           ║\n", trains[i].price, airplanes[i].price);
+        printf(" ╠═══════════════════════════════════════════╬════════════════════════════════════════╣\n");
     }
 
     // Bottom line
-    printf(" ╚═════════════════════════════════════════╩══════════════════════════════════════╝\n");
+    printf(" ╚═══════════════════════════════════════════╩════════════════════════════════════════╝\n");
 }
 
 void calcualte_score(Traveloption *trains, Traveloption *airplanes, int co2_pref, int price_pref, int totalTime_pref)
@@ -246,5 +245,24 @@ void setRank(Traveloption *arr, int type)
                 }
             }
         }
+    }
+}
+
+char optionLetter(int i)
+{
+    switch (i)
+    {
+    case 0:
+        return 'A';
+        break;
+    case 1:
+        return 'B';
+        break;
+    case 2:
+        return 'C';
+        break;
+
+    default:
+        break;
     }
 }
