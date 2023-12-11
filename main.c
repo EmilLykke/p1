@@ -13,7 +13,7 @@ int main(void)
     printf("This program will provide information about travel routes in Germany\n");
     printf("and display indepth details about the best route for you based on your preferences.\n");
     printf("Follow the provided steps below to see travel recomendations.\nFirstly you will be asked to declare how much you care about given parametres when choosing your travel form. \n");
-    printf("where 5 indicates high significance or strong emphasis, and 1 indicates low significance or minimal emphasis.");
+    printf("Where 5 indicates high significance or strong emphasis, and 1 indicates low significance or minimal emphasis.");
 
     while (1)
     {
