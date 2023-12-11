@@ -79,7 +79,8 @@ void printHelp()
     printf("\n\t- The scoring system incorporates the information you've submitted within each category, calculating it against the personalized available routes.\n\t A higher score signifies a route better fitted to meet your preferences. The score is not out of 100 but should just be read as; the higher the better.\n\n");
 
     printf("CO2 (in grams per person)\n");
-    printf("\n\t- The CO2 emission is calculated by multiplying the average CO2 emission for both trains and airplanes.\n\t With the average CO2 emission pr KM for trains being 0 and airplanes 246 gram. (for context people emit 3.2 pounds of Co2 a day on average)\n\n");
+    printf("\n\t- The CO2 emission is calculated by multiplying the average CO2 emission for both trains and airplanes.\n\t With the average CO2 emission pr KM for trains being 0 and airplanes 246 gram. (for context people emit 3.2 pounds of Co2 a day on average)\n");
+    printf("\t- CO2 emissions are calculated based on the distance from the average emessions per person for an airplane.\n\n");
 
     printf("Total time (in hours/minutes)\n");
     printf("\n\t- In total time we include the expected waste time, meaning the expected time in the airport, the average delay for airplanes/trains, and your trip to the airport/station.\n");
