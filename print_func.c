@@ -17,7 +17,7 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
 
     calcualte_score(trains, airplanes, co2_pref, price_pref, totalTime_pref);
 
-    printf("\n\n\nThe table below displays options A, B, and C for each travel route (airplane or train option) leading to your destination.\nEach route is ranked from 1 to 6 and is detailed with information regarding its parameters.\nStill confused? Press 'h' below");
+    printf("\n\n\nThe table below displays options A, B, and C for each travel mode (airplane or train option) leading to your destination.\nEach route is ranked from 1 to 6 and is detailed with information regarding its parameters.\nStill confused? Press 'h' below");
 
     printf("\n\n ╔═══════════════════════════════════════════╦════════════════════════════════════════╗\n");
     // Print headers
