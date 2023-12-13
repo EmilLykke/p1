@@ -38,11 +38,11 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
         printf(" ║                   Option %c                     ║                    Option %c                 ║\n", optionLetter(i), optionLetter(i));
         printf(" ║ Rank: %-10d                               ║ Rank: %-10d                            ║\n", trains[i].rank, airplanes[i].rank);
         printf(" ║ Score: %-10.2lf                              ║ Score: %-10.2lf                           ║\n", trains[i].score, airplanes[i].score);
-        printf(" ║ CO2 (grams emitted/per person): %-8.2lf       ║ CO2 (grams emitted/per person): %-8.1lf    ║\n", trains[i].co2, airplanes[i].co2);
+        printf(" ║ CO2 (grams): %-21.2lf             ║ CO2 (grams): %-21.1lf          ║\n", trains[i].co2, airplanes[i].co2);
         printf(" ║ Travel Time: %-18s                ║ Travel Time: %-18s             ║\n", convertMinutesToHours(trains[i].travelTime), convertMinutesToHours(airplanes[i].travelTime));
         printf(" ║ Down Time: %-18s                  ║ Down Time: %-18s               ║\n", convertMinutesToHours(trains[i].wasteTime), convertMinutesToHours(airplanes[i].wasteTime));
         printf(" ║ Total Time: %-10s                 ║ Total Time: %-10s              ║\n", convertMinutesToHours(trains[i].totalTime), convertMinutesToHours(airplanes[i].totalTime));
-        printf(" ║ Price (in euros): %-10.2lf                   ║ Price (in euros): %-10.2lf                ║\n", trains[i].price, airplanes[i].price);
+        printf(" ║ Price (euros): %-13.2lf                   ║ Price (euros): %-13.2lf                ║\n", trains[i].price, airplanes[i].price);
         printf(" ╠════════════════════════════════════════════════╬═════════════════════════════════════════════╣\n");
 
         free(trainTrav);
