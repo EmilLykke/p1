@@ -57,7 +57,7 @@ int main(void)
 
         while (train_index1 == -1 || train_index2 == -1 || train_index3 == -1 || airplane_index1 == -1 || airplane_index2 == -1 || airplane_index3 == -1)
         {
-            printf("\n\nNo routes found, please type in correct start and end destination\n");
+            printf("\n\nNo route found, please try again\n");
 
             startpoint_and_destination(startDestination, endDestination);
 
