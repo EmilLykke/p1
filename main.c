@@ -78,13 +78,19 @@ void printHelp()
     printf("Score (the higher the better)\n");
     printf("\n\t- The scoring system incorporates the information you've submitted within each category, calculating it against the personalized available routes.\n\t A higher score signifies a route better fitted to meet your preferences. The score is not out of 100 but should just be read as; the higher the better.\n\n");
 
-    printf("CO2 (in grams per person)\n");
-    printf("\n\t- The CO2 emission is calculated by multiplying the average CO2 emission for both trains and airplanes.\n\t With the average CO2 emission pr KM for trains being 0 and airplanes 246 gram. (for context people emit 3.2 pounds of Co2 a day on average)\n");
+    printf("CO2 (in grams per person per km)\n");
+    printf("\n\t- The CO2 emissions are calculated by multiplying the average CO2 emissions per person per kilometer traveled for both trains and airplanes.\n\t The average CO2 emission per person per kilometer for trains is 0 grams, while for airplanes, it is 246 grams. (For context, people emit an average of 1.45 kg of CO2 per day.)\n");
     printf("\t- CO2 emissions are calculated based on the distance from the average emessions per person for an airplane.\n\n");
 
+    printf("Travel time (in hours/minutes)\n");
+    printf("\n\t- Travel time is the time spent on the actual airplane or traine ride.\n");
+
+    printf("Down time (in hours/minutes)\n");
+    printf("\n\t- Down time is the expected waiting time in the airport, the average delay for airplanes/trains, and your trip to the airport/station.\n");
+    printf("\t- Down time is on average for airplanes 4 hours (240 minutes) and trains 35 minutes.\n\n");
+
     printf("Total time (in hours/minutes)\n");
-    printf("\n\t- In total time we include the expected waste time, meaning the expected time in the airport, the average delay for airplanes/trains, and your trip to the airport/station.\n");
-    printf("\t- Wastetime is on average for airplanes 4 hours (240 minutes) and trains 35 minutes.\n\n");
+    printf("\n\t- The total time is the travel time added with the down time.\n");
 
     printf("Price (in euro)\n");
     printf("\n\t- Shows the ticket price for the specific travel option in euros.\n\n");
