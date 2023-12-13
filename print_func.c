@@ -11,6 +11,7 @@ char optionLetter(int);
 
 void rank_by_param(Traveloption *, Traveloption *, int, int, int, int);
 void calcualte_score(Traveloption *, Traveloption *, int, int, int);
+char *convertMinutesToHours(int);
 
 void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, int price_pref, int totalTime_pref)
 {
@@ -19,24 +20,41 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
 
     printf("\n\n\nThe table below displays options A, B, and C for each travel mode (airplane or train option) leading to your destination.\nEach route is ranked from 1 to 6 and is detailed with information regarding its parameters.\nStill confused? Press 'h' below");
 
-    printf("\n\n ╔═══════════════════════════════════════════╦════════════════════════════════════════╗\n");
+    printf("\n\n ╔════════════════════════════════════════════════╦═════════════════════════════════════════════╗\n");
     // Print headers
-    printf(" ║ Trains                                    ║ Airplanes                              ║\n");
-    printf(" ╠═══════════════════════════════════════════╬════════════════════════════════════════╣\n");
+    printf(" ║ Trains                                         ║ Airplanes                                   ║\n");
+    printf(" ╠════════════════════════════════════════════════╬═════════════════════════════════════════════╣\n");
     // Print table rows
     for (int i = 0; i < 3; i++)
     {
-        printf(" ║                Option %c                   ║                 Option %c               ║\n", optionLetter(i), optionLetter(i));
-        printf(" ║ Rank: %-10d                          ║ Rank: %-10d                       ║\n", trains[i].rank, airplanes[i].rank);
-        printf(" ║ Score: %-10.2lf                         ║ Score: %-10.2lf                      ║\n", trains[i].score, airplanes[i].score);
-        printf(" ║ CO2 (grams emitted/per person): %-5.2lf     ║ CO2 (grams emitted/per person): %-7.1lf║\n", trains[i].co2, airplanes[i].co2);
-        printf(" ║ Total Time (in minutes): %-10d       ║ Total Time (in minutes): %-10d    ║\n", trains[i].totalTime, airplanes[i].totalTime);
-        printf(" ║ Price (in euros): %-10.2lf              ║ Price (in euros): %-10.2lf           ║\n", trains[i].price, airplanes[i].price);
-        printf(" ╠═══════════════════════════════════════════╬════════════════════════════════════════╣\n");
+        char *trainTrav = convertMinutesToHours(trains[i].travelTime);
+        char *trainDown = convertMinutesToHours(trains[i].wasteTime);
+        char *trainTotal = convertMinutesToHours(trains[i].totalTime);
+
+        char *airplaneTrav = convertMinutesToHours(airplanes[i].travelTime);
+        char *airplaneDown = convertMinutesToHours(airplanes[i].wasteTime);
+        char *airplaneTotal = convertMinutesToHours(airplanes[i].totalTime);
+
+        printf(" ║                   Option %c                     ║                    Option %c                 ║\n", optionLetter(i), optionLetter(i));
+        printf(" ║ Rank: %-10d                               ║ Rank: %-10d                            ║\n", trains[i].rank, airplanes[i].rank);
+        printf(" ║ Score: %-10.2lf                              ║ Score: %-10.2lf                           ║\n", trains[i].score, airplanes[i].score);
+        printf(" ║ CO2 (grams emitted/per person): %-8.2lf       ║ CO2 (grams emitted/per person): %-8.1lf    ║\n", trains[i].co2, airplanes[i].co2);
+        printf(" ║ Travel Time: %-18s                ║ Travel Time: %-18s             ║\n", convertMinutesToHours(trains[i].travelTime), convertMinutesToHours(airplanes[i].travelTime));
+        printf(" ║ Down Time: %-18s                  ║ Down Time: %-18s               ║\n", convertMinutesToHours(trains[i].wasteTime), convertMinutesToHours(airplanes[i].wasteTime));
+        printf(" ║ Total Time: %-10s                 ║ Total Time: %-10s              ║\n", convertMinutesToHours(trains[i].totalTime), convertMinutesToHours(airplanes[i].totalTime));
+        printf(" ║ Price (in euros): %-10.2lf                   ║ Price (in euros): %-10.2lf                ║\n", trains[i].price, airplanes[i].price);
+        printf(" ╠════════════════════════════════════════════════╬═════════════════════════════════════════════╣\n");
+
+        free(trainTrav);
+        free(trainDown);
+        free(trainTotal);
+        free(airplaneTrav);
+        free(airplaneDown);
+        free(airplaneTotal);
     }
 
     // Bottom line
-    printf(" ╚═══════════════════════════════════════════╩════════════════════════════════════════╝\n");
+    printf(" ╚════════════════════════════════════════════════╩═════════════════════════════════════════════╝\n");
 }
 
 void calcualte_score(Traveloption *trains, Traveloption *airplanes, int co2_pref, int price_pref, int totalTime_pref)
@@ -265,4 +283,26 @@ char optionLetter(int i)
     default:
         break;
     }
+}
+
+char *convertMinutesToHours(int time)
+{
+    // Ensure non-negative input
+    int calchour;
+    int restmin;
+    char *final = (char *)malloc(50);
+
+    calchour = time / 60;
+    restmin = time % 60;
+
+    if (calchour < 1)
+    {
+        sprintf(final, "%d minutes", restmin);
+    }
+    else
+    {
+        sprintf(final, "%d hours %d minutes", calchour, restmin);
+    }
+
+    return final;
 }
