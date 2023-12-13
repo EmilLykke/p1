@@ -1,3 +1,12 @@
+
+// -----------------------------------------------------------------
+//
+//  File: print_func.c
+//
+//  History: Dec-10-23
+//
+//------------------------------------------------------------------
+
 #include "functions.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,15 +24,17 @@ char *convertMinutesToHours(int);
 
 void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, int price_pref, int totalTime_pref)
 {
-
+    // Sets rank and calculates score of our found routes
     calcualte_score(trains, airplanes, co2_pref, price_pref, totalTime_pref);
+
 
     printf("\n\n\nThe table below displays options A, B, and C for each travel mode (airplane or train option) leading to your destination.\nEach route is ranked from 1 to 6 and is detailed with information regarding its parameters.\nStill confused? Press 'h' below");
 
-    printf("\n\n ╔════════════════════════════════════════════════╦═════════════════════════════════════════════╗\n");
     // Print headers
+    printf("\n\n ╔════════════════════════════════════════════════╦═════════════════════════════════════════════╗\n");
     printf(" ║ Trains                                         ║ Airplanes                                   ║\n");
     printf(" ╠════════════════════════════════════════════════╬═════════════════════════════════════════════╣\n");
+
     // Print table rows
     for (int i = 0; i < 3; i++)
     {
@@ -46,6 +57,7 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
         printf(" ║ Price (euros): %-13.2lf                   ║ Price (euros): %-13.2lf                ║\n", trains[i].price, airplanes[i].price);
         printf(" ╠════════════════════════════════════════════════╬═════════════════════════════════════════════╣\n");
 
+        // Frees memory
         free(trainTrav);
         free(trainDown);
         free(trainTotal);
@@ -60,6 +72,11 @@ void printRoutes(Traveloption *trains, Traveloption *airplanes, int co2_pref, in
 
 void calcualte_score(Traveloption *trains, Traveloption *airplanes, int co2_pref, int price_pref, int totalTime_pref)
 {
+
+    //
+    // Ranks traveloption for trains and airplaine aswell as calculate scores
+    //
+
     rank_by_param(trains, airplanes, co2_pref, price_pref, totalTime_pref, 0);
 
     rank_by_param(trains, airplanes, co2_pref, price_pref, totalTime_pref, 1);
@@ -69,7 +86,10 @@ void calcualte_score(Traveloption *trains, Traveloption *airplanes, int co2_pref
 
 void rank_by_param(Traveloption *trains, Traveloption *airplanes, int co2_pref, int price_pref, int totalTime_pref, int type)
 {
+    // Allocates memory
     Traveloption *ranking = (Traveloption *)malloc(6 * sizeof(Traveloption));
+
+    // Init our found routes to a ranking array
     ranking[0] = trains[0];
     ranking[1] = trains[1];
     ranking[2] = trains[2];
@@ -77,7 +97,7 @@ void rank_by_param(Traveloption *trains, Traveloption *airplanes, int co2_pref, 
     ranking[4] = airplanes[1];
     ranking[5] = airplanes[2];
 
-    // Type 0 = total time
+    // Type 0 = ranks total time
     if (type == 0)
     {
         qsort(ranking, 6, sizeof(Traveloption), sortTotalTime);
@@ -93,7 +113,7 @@ void rank_by_param(Traveloption *trains, Traveloption *airplanes, int co2_pref, 
         }
     }
 
-    // Type 1 = price
+    // Type 1 = ranks price
     else if (type == 1)
     {
         qsort(ranking, 6, sizeof(Traveloption), sortPrice);
@@ -108,7 +128,8 @@ void rank_by_param(Traveloption *trains, Traveloption *airplanes, int co2_pref, 
             ranking[i].score += (6 + 1 - (ranking[i].rank)) * price_pref;
         }
     }
-    // Type 2 = co2
+    
+    // Type 2 = ranks co2
     else if (type == 2)
     {
         qsort(ranking, 6, sizeof(Traveloption), sortCo2);
@@ -128,6 +149,7 @@ void rank_by_param(Traveloption *trains, Traveloption *airplanes, int co2_pref, 
     setRank(ranking, 2);
 
     int airIn = 0, trainIn = 0;
+
     for (int i = 0; i < 6; i++)
     {
         if (ranking[i].type == TRAIN)

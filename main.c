@@ -1,3 +1,13 @@
+// -----------------------------------------------------------------
+//
+//  "TravInfo" Demo - AAU CPH Group 7 SW1
+//
+//  File: main.c
+//
+//  History: Dec-14-23
+//
+//------------------------------------------------------------------
+
 #include "functions.h"
 #include <stdio.h>
 #include <string.h>
@@ -8,6 +18,11 @@ void printHelp();
 int main(void)
 {
     char run;
+    char startDestination[100], endDestination[100];
+    int co2_rating, time_rating, price_rating;
+    int train_index1 = -1, train_index2 = -1, train_index3 = -1, airplane_index1 = -1, airplane_index2 = -1, airplane_index3 = -1;
+    int airplaneSize = 0, trainSize = 0;
+
     printf("\n\nWelcome to TravInfo. (Demo)\n\n");
     printf("------------------------------------------------------------------\n");
     printf("This program will provide information about travel routes in Germany\n");
@@ -15,6 +30,7 @@ int main(void)
     printf("Follow the provided steps below to see travel recomendations.\nFirstly you will be asked to declare how much you care about given parametres when choosing your travel form. \n");
     printf("Where 5 indicates high significance or strong emphasis, and 1 indicates low significance or minimal emphasis.");
 
+    // do while loop -> User input error handling
     while (1)
     {
         do
@@ -23,25 +39,21 @@ int main(void)
             scanf(" %c", &run);
         } while (run != 's' && run != 'q' && run != 'h');
 
+        // Quit
         if (run == 'q')
         {
             break;
         }
 
+        // Help
         if (run == 'h')
         {
             printHelp();
         }
 
-        char startDestination[100];
-        char endDestination[100];
-        int co2_rating, time_rating, price_rating;
-        int train_index1 = -1, train_index2 = -1, train_index3 = -1, airplane_index1 = -1, airplane_index2 = -1, airplane_index3 = -1;
-
         scan_user_input(&co2_rating, &time_rating, &price_rating, startDestination, endDestination);
 
-        int airplaneSize = 0, trainSize = 0;
-
+        // Reads csv files and assigns it to arrays
         Traveloption *airplanes_array = csv_read("airplanes.csv", &airplaneSize, AIRPLANE);
         Traveloption *trains_array = csv_read("trains.csv", &trainSize, TRAIN);
 
@@ -51,10 +63,14 @@ int main(void)
             return 1;
         }
 
-        Traveloption *airplanes = find_route(airplanes_array, startDestination, endDestination, airplaneSize, &airplane_index1, &airplane_index2, &airplane_index3, AIRPLANE);
+        //
+        // Recieves index of the found routes aswell as calculating remaining parametres.
+        //
 
+        Traveloption *airplanes = find_route(airplanes_array, startDestination, endDestination, airplaneSize, &airplane_index1, &airplane_index2, &airplane_index3, AIRPLANE);
         Traveloption *trains = find_route(trains_array, startDestination, endDestination, trainSize, &train_index1, &train_index2, &train_index3, TRAIN);
 
+        // Error handling (if no routes are found)
         while (train_index1 == -1 || train_index2 == -1 || train_index3 == -1 || airplane_index1 == -1 || airplane_index2 == -1 || airplane_index3 == -1)
         {
             printf("\n\nNo route found, please try again\n");
@@ -66,11 +82,16 @@ int main(void)
             trains = find_route(trains_array, startDestination, endDestination, trainSize, &train_index1, &train_index2, &train_index3, TRAIN);
         }
 
+        //
+        // Assigns found routes to the 2 arrays and prints them into a table.
+        //
+
         Traveloption topTrains[] = {trains[train_index1], trains[train_index2], trains[train_index3]};
         Traveloption topAirplanes[] = {airplanes[airplane_index1], airplanes[airplane_index2], airplanes[airplane_index3]};
 
         printRoutes(topTrains, topAirplanes, co2_rating, price_rating, time_rating);
 
+        // Free memory
         free(airplanes_array);
         free(trains_array);
         free(airplanes);
