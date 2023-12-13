@@ -55,10 +55,21 @@ int main(void)
 
         Traveloption *trains = find_route(trains_array, startDestination, endDestination, trainSize, &train_index1, &train_index2, &train_index3, TRAIN);
 
-        Traveloption topTrain[] = {trains[train_index1], trains[train_index2], trains[train_index3]};
+        while (train_index1 == -1 || train_index2 == -1 || train_index3 == -1 || airplane_index1 == -1 || airplane_index2 == -1 || airplane_index3 == -1)
+        {
+            printf("\n\nNo routes found, please type in correct start and end destination\n");
+
+            startpoint_and_destination(startDestination, endDestination);
+
+            airplanes = find_route(airplanes_array, startDestination, endDestination, airplaneSize, &airplane_index1, &airplane_index2, &airplane_index3, AIRPLANE);
+
+            trains = find_route(trains_array, startDestination, endDestination, trainSize, &train_index1, &train_index2, &train_index3, TRAIN);
+        }
+
+        Traveloption topTrains[] = {trains[train_index1], trains[train_index2], trains[train_index3]};
         Traveloption topAirplanes[] = {airplanes[airplane_index1], airplanes[airplane_index2], airplanes[airplane_index3]};
 
-        printRoutes(topTrain, topAirplanes, co2_rating, price_rating, time_rating);
+        printRoutes(topTrains, topAirplanes, co2_rating, price_rating, time_rating);
 
         free(airplanes_array);
         free(trains_array);

@@ -23,6 +23,7 @@ typedef struct
 
 // Scans user input
 void scan_user_input(int *, int *, int *, char *, char *);
+void startpoint_and_destination(char *, char *);
 
 // CSV file reader
 Traveloption *csv_read(char *, int *, int);
