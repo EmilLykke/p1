@@ -1,10 +1,15 @@
+//              //
+// HEADER FILE  //
+//              //
 
+// Used for type
 enum train_or_plaine
 {
     TRAIN = 1,
     AIRPLANE = 2,
 };
 
+// Struct for each travel option
 typedef struct
 {
     char *startDest;
@@ -20,6 +25,10 @@ typedef struct
     int rank;
 
 } Traveloption;
+
+//
+// Prototypes
+//
 
 // Scans user input
 void scan_user_input(int *, int *, int *, char *, char *);
