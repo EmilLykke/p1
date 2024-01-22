@@ -50,6 +50,7 @@ int main(void)
         {
             printHelp();
         }
+        // hej
 
         scan_user_input(&co2_rating, &time_rating, &price_rating, startDestination, endDestination);
 
